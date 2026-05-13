@@ -1,0 +1,385 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+@layer base {
+  :root {
+    --brand-bronze: #B19CD9;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply text-brand-cream antialiased;
+    background: radial-gradient(ellipse at top, #251A38 0%, #0F0A18 45%, #050308 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(177, 156, 217, 0.35);
+    color: #F3EFFD;
+  }
+}
+
+@layer components {
+  /* =========================================
+     BUTTONS — Apple-style pill buttons
+     ========================================= */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           font-medium text-sm
+           px-6 py-2.5
+           cursor-pointer relative;
+    background: #B19CD9;
+    color: #15102A;
+    border-radius: 9999px;
+    border: none;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background: #C8B6E5;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 28px rgba(177, 156, 217, 0.5);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           font-medium text-sm text-brand-cream
+           px-6 py-2.5
+           cursor-pointer;
+    background: rgba(177, 156, 217, 0.08);
+    border: 1px solid rgba(177, 156, 217, 0.25);
+    border-radius: 9999px;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(177, 156, 217, 0.15);
+    border-color: rgba(177, 156, 217, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0);
+  }
+
+  /* =========================================
+     CARDS — Elevated glass with depth
+     ========================================= */
+  .apple-card {
+    @apply relative rounded-2xl p-6;
+    background: linear-gradient(145deg, rgba(45, 25, 70, 0.85), rgba(20, 10, 35, 0.95));
+    border: 1px solid rgba(177, 156, 217, 0.12);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(177, 156, 217, 0.04) inset,
+      0 1px 0 rgba(255, 255, 255, 0.04) inset;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .apple-card:hover {
+    border-color: rgba(177, 156, 217, 0.3);
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.6),
+      0 0 40px rgba(177, 156, 217, 0.1),
+      0 0 0 1px rgba(177, 156, 217, 0.06) inset,
+      0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    transform: translateY(-2px);
+  }
+
+  .apple-card-static {
+    @apply relative rounded-2xl p-6;
+    background: linear-gradient(145deg, rgba(40, 20, 60, 0.85), rgba(18, 10, 30, 0.95));
+    border: 1px solid rgba(177, 156, 217, 0.08);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(177, 156, 217, 0.03) inset,
+      0 1px 0 rgba(255, 255, 255, 0.03) inset;
+    backdrop-filter: blur(20px);
+  }
+
+  /* Legacy support */
+  .brand-card {
+    @apply apple-card;
+    border-left: 3px solid rgba(177, 156, 217, 0.4);
+  }
+
+  /* =========================================
+     FORM INPUTS — Visible depth
+     ========================================= */
+  .brand-input {
+    @apply w-full text-brand-cream font-body text-sm
+           px-4 py-3 transition-all duration-200;
+    background: rgba(10, 5, 20, 0.5);
+    border: 1px solid rgba(177, 156, 217, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) inset;
+  }
+
+  .brand-input:focus {
+    @apply outline-none;
+    border-color: rgba(177, 156, 217, 0.6);
+    box-shadow: 0 0 0 3px rgba(177, 156, 217, 0.18), 0 0 24px rgba(177, 156, 217, 0.1), 0 2px 4px rgba(0, 0, 0, 0.3) inset;
+    background: rgba(20, 10, 35, 0.6);
+  }
+
+  .brand-input::placeholder {
+    color: rgba(243, 239, 253, 0.25);
+  }
+
+  select.brand-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23A855F7' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    appearance: none;
+    padding-right: 36px;
+  }
+
+  select.brand-input option {
+    background: #251A38;
+    color: #F3EFFD;
+  }
+
+  /* =========================================
+     TYPOGRAPHY HELPERS
+     ========================================= */
+  .text-gradient-bronze {
+    color: #B19CD9;
+  }
+
+  .heading-xl {
+    @apply font-headline font-bold tracking-tight;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+  }
+
+  .heading-lg {
+    @apply font-headline font-bold text-3xl tracking-tight;
+    line-height: 1.15;
+  }
+
+  .heading-md {
+    @apply font-headline font-semibold text-xl tracking-tight;
+    line-height: 1.2;
+  }
+
+  .label-sm {
+    @apply text-xs font-medium tracking-wide uppercase;
+    color: rgba(243, 239, 253, 0.4);
+  }
+
+  /* =========================================
+     TABLE SYSTEM
+     ========================================= */
+  .apple-table {
+    @apply w-full text-sm;
+  }
+
+  .apple-table thead tr {
+    @apply text-xs font-semibold uppercase tracking-wider;
+    color: rgba(243, 239, 253, 0.35);
+    background: rgba(177, 156, 217, 0.04);
+  }
+
+  .apple-table thead th {
+    @apply px-6 py-4;
+  }
+
+  .apple-table tbody tr {
+    @apply transition-colors duration-150;
+    border-bottom: 1px solid rgba(177, 156, 217, 0.06);
+  }
+
+  .apple-table tbody tr:hover {
+    background: rgba(177, 156, 217, 0.04);
+  }
+
+  .apple-table tbody td {
+    @apply px-6 py-4;
+  }
+
+  /* =========================================
+     BADGE SYSTEM
+     ========================================= */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-success {
+    background: rgba(74, 222, 128, 0.12);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.25);
+  }
+
+  .badge-warning {
+    background: rgba(200, 162, 220, 0.12);
+    color: #f472b6;
+    border: 1px solid rgba(200, 162, 220, 0.3);
+  }
+
+  .badge-danger {
+    background: rgba(248, 113, 113, 0.12);
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.25);
+  }
+
+  .badge-bronze {
+    background: rgba(177, 156, 217, 0.12);
+    color: #C8B6E5;
+    border: 1px solid rgba(177, 156, 217, 0.3);
+  }
+
+  .badge-neutral {
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(243, 239, 253, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* =========================================
+     SECTION DIVIDER
+     ========================================= */
+  .section-divider::before {
+    content: '';
+    @apply block w-10 h-0.5 mb-6;
+    background: #B19CD9;
+  }
+
+  .section-divider-center::before {
+    @apply mx-auto;
+  }
+
+  /* =========================================
+     STAT NUMBER
+     ========================================= */
+  .stat-number {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* =========================================
+     SCROLL REVEAL
+     ========================================= */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.12s; }
+  .reveal-delay-2 { transition-delay: 0.24s; }
+  .reveal-delay-3 { transition-delay: 0.36s; }
+  .reveal-delay-4 { transition-delay: 0.48s; }
+  .reveal-delay-5 { transition-delay: 0.60s; }
+
+  /* =========================================
+     NOISE TEXTURE OVERLAY
+     ========================================= */
+  .noise-overlay::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none !important;
+    z-index: -1;
+    opacity: 0.018;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* =========================================
+     GRID BACKGROUND
+     ========================================= */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(177, 156, 217, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(177, 156, 217, 0.02) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black 20%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black 20%, transparent 100%);
+  }
+
+  /* =========================================
+     FLOATING ORB
+     ========================================= */
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    animation: orb-float 10s ease-in-out infinite;
+  }
+
+  .glow-orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(177, 156, 217, 0.15), transparent 70%);
+    top: -150px; right: -100px;
+  }
+
+  .glow-orb-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200, 162, 220, 0.1), transparent 70%);
+    bottom: 20%; left: -100px;
+    animation-delay: -5s;
+  }
+
+  @keyframes orb-float {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(15px, -20px); }
+    66% { transform: translate(-10px, 15px); }
+  }
+
+  .animated-line {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animated-line::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(177, 156, 217, 0.5), transparent);
+  }
+
+  .badge-float {
+    animation: badge-float 6s ease-in-out infinite;
+  }
+
+  @keyframes badge-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
+  }
+}

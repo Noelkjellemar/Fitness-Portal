@@ -1,0 +1,148 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  name           String?
+  hashedPassword String?
+  role           String    @default("client")
+  avatarUrl      String?
+  country        String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  coachClients   CoachClient[] @relation("Coach")
+  clientCoach    CoachClient[] @relation("Client")
+  onboarding     Onboarding?
+  workoutPlans   WorkoutPlan[]
+  nutritionPlans NutritionPlan[]
+  checkIns       CheckIn[]
+  progressPhotos ProgressPhoto[]
+  measurements   Measurement[]
+  performanceLogs PerformanceLog[]
+  notifications Notification[]
+}
+
+model CoachClient {
+  id         String   @id @default(cuid())
+  coachId    String
+  clientId   String
+  tier       String   @default("elite")
+  assignedAt DateTime @default(now())
+  coach  User @relation("Coach", fields: [coachId], references: [id])
+  client User @relation("Client", fields: [clientId], references: [id])
+  @@unique([coachId, clientId])
+}
+
+model Onboarding {
+  id               String   @id @default(cuid())
+  clientId         String   @unique
+  responsesJson    String
+  extractedSummary String?
+  status           String   @default("pending")
+  submittedAt      DateTime?
+  createdAt        DateTime @default(now())
+  client User @relation(fields: [clientId], references: [id])
+}
+
+model WorkoutPlan {
+  id          String    @id @default(cuid())
+  clientId    String
+  week        Int
+  phase       Int
+  planJson    String
+  createdBy   String?
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  client User @relation(fields: [clientId], references: [id])
+}
+
+model NutritionPlan {
+  id              String    @id @default(cuid())
+  clientId        String
+  week            Int
+  planJson        String
+  groceryListJson String?
+  publishedAt     DateTime?
+  createdAt       DateTime  @default(now())
+  client User @relation(fields: [clientId], references: [id])
+}
+
+model CheckIn {
+  id                  String   @id @default(cuid())
+  clientId            String
+  date                DateTime @default(now())
+  mood                Int?
+  energy              Int?
+  sleepHours          Float?
+  sleepQuality        Int?
+  trained             Boolean  @default(false)
+  trainingLogJson     String?
+  nutritionCompliance String?
+  offPlanMeals        String?
+  waterMl             Int?
+  weightKg            Float?
+  steps               Int?
+  stressLevel         Int?
+  workoutName         String?
+  workoutPerformance  Int?
+  notes               String?
+  client User @relation(fields: [clientId], references: [id])
+}
+
+model ProgressPhoto {
+  id       String   @id @default(cuid())
+  clientId String
+  url      String
+  angle    String?
+  date     DateTime @default(now())
+  phase    Int?
+  week     Int?
+  client User @relation(fields: [clientId], references: [id])
+}
+
+model Measurement {
+  id               String   @id @default(cuid())
+  clientId         String
+  date             DateTime @default(now())
+  weightKg         Float?
+  bodyFatPct       Float?
+  measurementsJson String?
+  client User @relation(fields: [clientId], references: [id])
+}
+
+model PerformanceLog {
+  id       String   @id @default(cuid())
+  clientId String
+  date     DateTime @default(now())
+  exercise String
+  value    Float
+  unit     String
+  notes    String?
+  client User @relation(fields: [clientId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+}
+
+model QuizSubmission {
+  id                  String   @id @default(cuid())
+  email               String?
+  responsesJson       String
+  qualificationStatus String
+  createdAt           DateTime @default(now())
+}
