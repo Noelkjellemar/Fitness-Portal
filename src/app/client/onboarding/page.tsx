@@ -109,7 +109,7 @@ function OnboardingPage() {
               <p className="text-sm text-brand-cream/40 mb-4">30-minute private call with your coach to go over your protocol.</p>
             </div>
             <iframe
-              src="https://calendly.com/zenith/30min?hide_gdpr_banner=1&background_color=131313&text_color=F5F1E8&primary_color=C9A961"
+              src="https://calendly.com/stefan-tantari/checkin-call"
               width="100%"
               height="650"
               frameBorder="0"
