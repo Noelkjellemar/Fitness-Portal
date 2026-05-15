@@ -248,7 +248,7 @@ export default function ClientDashboard() {
           Book your weekly call with your coach to review progress and adjust your protocol.
         </p>
         <iframe
-          src="https://cal.com/zenith/check-in-call?embed=true&theme=dark&brandColor=B19CD9"
+          src="https://calendly.com/stefan-tantari/checkin-call"
           className="w-full h-[640px] rounded-2xl border border-white/[0.06]"
           loading="lazy"
           title="Book check-in call"
